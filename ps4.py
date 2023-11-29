@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 # Here's a Category page for Simple English Wikipedia
 #URL = "https://en.wikipedia.org/wiki/Category:Endangered_animals"
-URL = sys.argv[1]
+HorrorURL = "https://imsdb.com/genre/Horror"
 
 # Get that page.
 page = requests.get(URL)
@@ -18,18 +18,20 @@ page = requests.get(URL)
 soup = BeautifulSoup(page.content, "html.parser")
 
 # List for storing the links to pages we want to get.
-cat_pages = []
+HorrorMovies = []
 
 # Find the heading associated with "Pages in category"
 # Depending on the Category page you are looking at.
 # you might need to change the text you want to match.
 for h2 in soup.find_all("h2"):
-    if "Pages in category" in h2.text:
+    if "Horror Movie Scripts" in h2.text:
 
         # Find all subsequent a href tags. 
-        for a in h2.find_all_next("a", href=True, limit=int(sys.argv[2])):
-            if "wiki" in a["href"]:
-                cat_pages.append(a["href"])
+        for a in h2.find_all_next("a", href=True, limit=int(10)):
+            if "Movie%20Scripts" in a["href"]:
+                for j in h2.find_all_next("j", href=True, limit=1):
+                    if "scripts" in j["href"]:
+                        HorrorMovies.append(j["href"])
 
 
 pagestrings = []
