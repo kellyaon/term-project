@@ -65,12 +65,12 @@ for a in soup.find_all("a", href=True):
 HorrorMovies = HorrorMovies[62:] # this is just to get rid of the first 62 eleemtns because they are other things from the page 
 for movie in HorrorMovies:
     print(movie)
-
-for h in HorrorMovies:
-
+pagestrings = []
+for movie in HorrorMovies:
+    # Replace spaces with hyphens
+    movie_with_hyphens = movie.replace(" ", "-")
     # You need to add the rest of the URL to the beginning.
-    URL = "https://imsdb.com/scripts/" + h
-
+    URL = "https://imsdb.com/scripts/" + movie_with_hyphens
     # Go get it and parse the html.
     page = requests.get(URL)
     newsoup = BeautifulSoup(page.content, "html.parser")
@@ -86,6 +86,7 @@ for h in HorrorMovies:
     mystring = re.sub("\[.*?\]", " ", mystring)
 
     pagestrings.append(mystring)
+    print (mystring)
 
 
 
