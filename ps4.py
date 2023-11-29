@@ -7,6 +7,8 @@ from wordcloud import WordCloud
 from bs4 import BeautifulSoup
 import matplotlib.pyplot as plt
 
+
+"""
 # Here's a Category page for Simple English Wikipedia
 #URL = "https://en.wikipedia.org/wiki/Category:Endangered_animals"
 HorrorURL = "https://imsdb.com/genre/Horror"
@@ -35,6 +37,33 @@ for h2 in soup.find_all("h2"):
 
 
 pagestrings = []
+"""
+
+HorrorURL = "https://imsdb.com/genre/Horror"
+
+# Get the page
+page = requests.get(HorrorURL)
+
+# Parse the HTML
+soup = BeautifulSoup(page.content, "html.parser")
+
+# List for storing movie names
+HorrorMovies = []
+
+# Find all 'a' tags with href attributes on the page
+for a in soup.find_all("a", href=True):
+    # Check if the text of the link contains '(' which is typical in movie script listings
+    if "(" in a.text:
+        # Extract the movie name by taking the substring before the first '('
+        movie_name = a.text.split(" (")[0].strip()
+        HorrorMovies.append(movie_name)
+    else:
+        # If there is no '(', assume the entire text is the movie name
+        HorrorMovies.append(a.text.strip())
+
+#this works and prints the names of the horror mpvies, we just need to get rid of the the names that arent titles
+for movie in HorrorMovies:
+    print(movie)
 
 for h in HorrorMovies:
 
