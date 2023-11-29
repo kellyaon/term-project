@@ -52,7 +52,7 @@ HorrorMovies = []
 
 # Find all 'a' tags with href attributes on the page
 for a in soup.find_all("a", href=True):
-    # Check if the text of the link contains '(' which is typical in movie script listings
+    # Check if the text of the link contains '(' since all the movies have ( after them
     if "(" in a.text:
         # Extract the movie name by taking the substring before the first '('
         movie_name = a.text.split(" (")[0].strip()
@@ -61,7 +61,8 @@ for a in soup.find_all("a", href=True):
         # If there is no '(', assume the entire text is the movie name
         HorrorMovies.append(a.text.strip())
 
-#this works and prints the names of the horror mpvies, we just need to get rid of the the names that arent titles
+#this works and prints the names of the horror mpvies, 
+HorrorMovies = HorrorMovies[62:] # this is just to get rid of the first 62 eleemtns because they are other things from the page 
 for movie in HorrorMovies:
     print(movie)
 
