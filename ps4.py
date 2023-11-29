@@ -36,10 +36,10 @@ for h2 in soup.find_all("h2"):
 
 pagestrings = []
 
-for c in cat_pages:
+for h in HorrorMovies:
 
     # You need to add the rest of the URL to the beginning.
-    URL = "https://en.wikipedia.org/" + c
+    URL = "https://imsdb.com/scripts/" + h
 
     # Go get it and parse the html.
     page = requests.get(URL)
@@ -57,8 +57,6 @@ for c in cat_pages:
 
     pagestrings.append(mystring)
 
-
-del pagestrings[0]
 
 
 ## TOKENIZE                                                                                         
