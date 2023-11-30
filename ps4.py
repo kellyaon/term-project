@@ -18,11 +18,8 @@ soup = BeautifulSoup(page.content, "html.parser")
 
 # List for storing movie names
 HorrorMovies = []
-movie_count = 0
 # Find all 'a' tags with href attributes on the page
 for a in soup.find_all("a", href=True):
-    if movie_count >= 20:  # Stop after 20 movies have been added
-        break
     # Check if the text of the link contains '(' since all the movies have ( after them
     if "(" in a.text:
         # Extract the movie name by taking the substring before the first '('
@@ -32,12 +29,10 @@ for a in soup.find_all("a", href=True):
     else:
         # If there is no '(', assume the entire text is the movie name
         HorrorMovies.append(a.text.strip())
-        movie_count += 1
 
 #this works and prints the names of the horror mpvies, 
-HorrorMovies = HorrorMovies[[62:62+20]  # this is just to get rid of the first 62 eleemtns because they are other things from the page 
-for movie in HorrorMovies:
-    print(movie)
+HorrorMovies = HorrorMovies[62:]  # this is just to get rid of the first 62 eleemtns because they are other things from the page 
+
 pagestrings = []
 for movie in HorrorMovies:
     # Replace spaces with hyphens
