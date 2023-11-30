@@ -70,7 +70,7 @@ for movie in HorrorMovies:
     # Replace spaces with hyphens
     movie_with_hyphens = movie.replace(" ", "-")
     # You need to add the rest of the URL to the beginning.
-    URL = "https://imsdb.com/scripts/" + movie_with_hyphens
+    URL = "https://imsdb.com/scripts/" + movie_with_hyphens +".html"
     # Go get it and parse the html.
     page = requests.get(URL)
     newsoup = BeautifulSoup(page.content, "html.parser")
