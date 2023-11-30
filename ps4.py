@@ -8,37 +8,6 @@ from bs4 import BeautifulSoup
 import matplotlib.pyplot as plt
 
 
-"""
-# Here's a Category page for Simple English Wikipedia
-#URL = "https://en.wikipedia.org/wiki/Category:Endangered_animals"
-HorrorURL = "https://imsdb.com/genre/Horror"
-
-# Get that page.
-page = requests.get(URL)
-
-# Now parse the html.
-soup = BeautifulSoup(page.content, "html.parser")
-
-# List for storing the links to pages we want to get.
-HorrorMovies = []
-
-# Find the heading associated with "Pages in category"
-# Depending on the Category page you are looking at.
-# you might need to change the text you want to match.
-for h2 in soup.find_all("h2"):
-    if "Horror Movie Scripts" in h2.text:
-
-        # Find all subsequent a href tags. 
-        for a in h2.find_all_next("a", href=True, limit=int(10)):
-            if "Movie%20Scripts" in a["href"]:
-                for j in h2.find_all_next("j", href=True, limit=1):
-                    if "scripts" in j["href"]:
-                        HorrorMovies.append(j["href"])
-
-
-pagestrings = []
-"""
-
 HorrorURL = "https://imsdb.com/genre/Horror"
 
 # Get the page
@@ -69,9 +38,8 @@ pagestrings = []
 for movie in HorrorMovies:
     # Replace spaces with hyphens
     movie_with_hyphens = movie.replace(" ", "-")
-    # You need to add the rest of the URL to the beginning.
+    #this is working and getting the correct links
     URL = "https://imsdb.com/scripts/" + movie_with_hyphens +".html"
-    # Go get it and parse the html.
     page = requests.get(URL)
     newsoup = BeautifulSoup(page.content, "html.parser")
 
@@ -86,7 +54,6 @@ for movie in HorrorMovies:
     mystring = re.sub("\[.*?\]", " ", mystring)
 
     pagestrings.append(mystring)
-    print (mystring)
 
 
 
@@ -97,12 +64,12 @@ for s in pagestrings:
     tokenlists.append(alltokens)
 
 ## REMOVE STOP WORDS                                                                                
-
+##WE STILL NEED TO ADD ANY ALL CAPS WORD SO IT REMOVES THE NAMES
 stoplist = stopwords.words('english')
-stoplist.extend([".", ",", "?", "could", "would", "“", "”", "’", ";", "!","much", "like", "one", "many", "though", "withzout", "upon"])
+stoplist.extend([".", ",", "?", "could", "would", "“", "”", "’", ";", "!","much", "like", "one", "many", "though", "without", "upon"])
 nostops = []
 for tl in tokenlists:
-    nostopwords = [w for w in tl if w.lower() not in stoplist]
+    nostopwords = [w for w in tl if w.lower() not in stoplist and not w.isupper()]
     nostops.append(nostopwords)
 
 
