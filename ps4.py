@@ -18,9 +18,11 @@ soup = BeautifulSoup(page.content, "html.parser")
 
 # List for storing movie names
 HorrorMovies = []
-
+movie_count = 0
 # Find all 'a' tags with href attributes on the page
 for a in soup.find_all("a", href=True):
+    if movie_count >= 20:  # Stop after 20 movies have been added
+        break
     # Check if the text of the link contains '(' since all the movies have ( after them
     if "(" in a.text:
         # Extract the movie name by taking the substring before the first '('
