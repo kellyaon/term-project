@@ -28,12 +28,14 @@ for a in soup.find_all("a", href=True):
         # Extract the movie name by taking the substring before the first '('
         movie_name = a.text.split(" (")[0].strip()
         HorrorMovies.append(movie_name)
+        movie_count += 1
     else:
         # If there is no '(', assume the entire text is the movie name
         HorrorMovies.append(a.text.strip())
+        movie_count += 1
 
 #this works and prints the names of the horror mpvies, 
-HorrorMovies = HorrorMovies[62:] # this is just to get rid of the first 62 eleemtns because they are other things from the page 
+HorrorMovies = HorrorMovies[[62:62+20]  # this is just to get rid of the first 62 eleemtns because they are other things from the page 
 for movie in HorrorMovies:
     print(movie)
 pagestrings = []
