@@ -111,5 +111,5 @@ wordcloud = WordCloud(width=800, height=400, background_color='white').generate(
 plt.figure(figsize=(10, 5))
 plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis('off')
-plt.title("Combined Word Cloud for Multiple URLs")
+plt.title("Horror Wordlcoud")
 plt.show()
