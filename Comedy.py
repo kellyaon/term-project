@@ -36,7 +36,7 @@ for a in soup.find_all("a", href=True):
 
 
 # Remove the first 62 elements (non-movie items)
-ComedyMovies = ComedyMovies[62:77]
+ComedyMovies = ComedyMovies[62:82]
 
 
 # List for storing urls
@@ -50,8 +50,7 @@ for movie in ComedyMovies:
     url_list.append(movie_url)
 
 
-#traverse url_list
-
+# Traverse url_list
 for links in url_list:
     script=requests.get(links)
     if script.status_code==200:
@@ -73,8 +72,6 @@ for links in url_list:
 # NLTK's required resources
 nltk.download('punkt')
 nltk.download('stopwords')
-
-# ... [Your existing code up to all_text] ...
 
 # Tokenize the text
 tokens = word_tokenize(all_text)
@@ -100,6 +97,7 @@ finder.apply_word_filter(lambda w: len(w) < 3 or w.lower() in stop_words)
 # Top 10 collocations
 top_10_collocations = finder.nbest(bigram_measures.pmi, 30)
 
+# Prints bigrams and collocations
 print("Top 10 Bigrams:", top_10_bigrams)
 print("\nTop 10 Collocations:", top_10_collocations)
 
