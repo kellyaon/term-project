@@ -1,1 +1,15 @@
+Our Repository
+The repository has two Python scripts: horror.py and comedy.py. 
+Both scripts were created to analyze movie scripts from their respective genres by creating word clouds as well as common collocations and bigrams.
 
+Horror.py and Comedy.py
+Both scripts extract text from the source IMSDB.com. The process it done by first fetching the scripts. 
+Then, using the BeautfulSoup library, the script parses the HTML to extract the text for 20 scripts of the respective genre. 
+This text is then processed by tokenizing the words and removing stopwords. 
+Using the WordCloud library, the scripts create word clouds for the respective genre. 
+The bigrams and colocations were collected using the nltk library.  
+
+Requirements to run our scripts:
+- Python 3.x
+- Libraries: “requests”, “bs4” (BeautifulSoup), “nltk”, “matplotlib”
+- NLTK data (stopwords, tokenizers, etc.)
